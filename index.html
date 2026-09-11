@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maestro Leads Input</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--tg-theme-bg-color, #f5f5f5);
+            color: var(--tg-theme-text-color, #222);
+            margin: 0;
+            padding: 16px;
+        }
+        .container {
+            max-width: 420px;
+            margin: auto;
+            background: var(--tg-theme-secondary-bg-color, #ffffff);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        h2 { text-align: center; color: var(--tg-theme-button-color, #2481cc); margin-top: 0; margin-bottom: 20px; }
+        .form-group { margin-bottom: 14px; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; }
+        select, input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            background-color: var(--tg-theme-button-color, #2481cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:active { opacity: 0.85; }
+        #successMessage {
+            display: none;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        #successMessage h3 {
+            color: #28a745;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .icon-check {
+            font-size: 48px;
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="formContainer">
+            <h2>Input Prospek Baru</h2>
+            <form id="leadForm">
+                <div class="form-group">
+                    <label for="sheetName">Pilih Tab Perumahan</label>
+                    <select id="sheetName" required>
+                        <option value="BARRA RESIDENCE">BARRA RESIDENCE</option>
+                        <option value="BMR">BMR</option>
+                        <option value="MAESTRO ESTATE BANDENGAN">MAESTRO ESTATE BANDENGAN</option>
+                    </select>
+                </div>
+                <div class="form-group" id="tglBookingGroup" style="display:none;">
+                    <label for="tglBooking">Tanggal Booking</label>
+                    <input type="text" id="tglBooking" placeholder="DD/MM/YYYY (Contoh: 04/09/2026)">
+                </div>
+                <div class="form-group">
+                    <label for="rumahNo">Nomor Rumah / Unit</label>
+                    <input type="text" id="rumahNo" placeholder="Contoh: A09 atau B10" required>
+                </div>
+                <div class="form-group">
+                    <label for="statusRumah">Status Rumah</label>
+                    <select id="statusRumah">
+                        <option value="Ready">Ready</option>
+                        <option value="Proses Bangun">Proses Bangun</option>
+                        <option value="Finishing">Finishing</option>
+                        <option value="Belum dibangun">Belum dibangun</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prioritas">Prioritas</label>
+                    <select id="prioritas">
+
+                <option value="P0">P0</option>
+                        <option value="P1">P1</option>
+                        <option value="P2">P2</option>
+                        <option value="P3">P3</option>
+                        <option value="P4">P4</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pemilik">Nama Konsumen / Pemilik</label>
+                    <input type="text" id="pemilik" placeholder="Nama Lengkap Konsumen" required>
+                </div>
+                <div class="form-group">
+                    <label for="whatsapp">Nomor WhatsApp</label>
+                    <input type="text" id="whatsapp" placeholder="+62 8xx-xxxx-xxxx" required>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status Prospek</label>
+                    <select id="status">
+                        <option value="Dalam proses">Dalam proses</option>
+                        <option value="Booking">Booking</option>
+                        <option value="ACC (SP3K)">ACC (SP3K)</option>
+                        <option value="Akad">Akad</option>
+                        <option value="Cancel">Cancel</option>
+                        <option value="Reject">Reject</option>
+                        <option value="Survey">Survey</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bank">Bank / Pembayaran</label>
+                    <select id="bank">
+                        <option value="BTN">BTN</option>
+                        <option value="MANDIRI">MANDIRI</option>
+                        <option value="CASH">CASH</option>
+                        <option value="CASH TEMPO">CASH TEMPO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pencapaian">Pencapaian / Keterangan</label>
+                    <input type="text" id="pencapaian" placeholder="Contoh: Pemberkasan / Serah terima kunci">
+                </div>
+                <div class="form-group">
+                    <label for="catatan">Catatan Tambahan</label>
+                    <input type="text" id="catatan" placeholder="Contoh: Menunggu BI checking / DP lunas">
+                </div>
+                <button type="button" onclick="submitData()">Simpan Data</button>
+            </form>
+        </div>
+
+        <div id="successMessage">
+            <div class="icon-check">✅</div>
+            <h3>Berhasil Disimpan!</h3>
+            <p>Data prospek sedang dikirim ke Google Sheets...</p>
+        </div>
+    </div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        document.getElementById('sheetName').addEventListener('change', function() {
+            const tglGroup = document.getElementById('tglBookingGroup');
+            if (this.value === 'MAESTRO ESTATE BANDENGAN') {
+                tglGroup.style.display = 'block';
+            } else {
+                tglGroup.style.display = 'none';
+            }
+        });
+
+        function submitData() {
+            const pemilik = document.getElementById('pemilik').value;
+            const rumahNo = document.getElementById('rumahNo').value;
+            
+            if (!pemilik || !rumahNo) {
+                alert('Mohon lengkapi Nama Konsumen dan Nomor Rumah!');
+                return;
+            }
+
+            const data = {
+                sheetName: document.getElementById('sheetName').value,
+                tglBooking: document.getElementById('tglBooking').value,
+                rumahNo: rumahNo,
+                statusRumah: document.getElementById('statusRumah').value,
+                prioritas: document.getElementById('prioritas').value,
+                pemilik: pemilik,
+                whatsapp: document.getElementById('whatsapp').value,
+                status: document.getElementById('status').value,
+                bank: document.getElementById('bank').value,
+
+              pencapaian: document.getElementById('pencapaian').value,
+                catatan: document.getElementById('catatan').value
+            };
+
+            tg.sendData(JSON.stringify(data));
+
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+
+            setTimeout(function() {
+                tg.close();
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
