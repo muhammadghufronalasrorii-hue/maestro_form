@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maestro Leads Input</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--tg-theme-bg-color, #f5f5f5);
+            color: var(--tg-theme-text-color, #222);
+            margin: 0;
+            padding: 16px;
+        }
+        .container {
+            max-width: 420px;
+            margin: auto;
+            background: var(--tg-theme-secondary-bg-color, #ffffff);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        h2 { text-align: center; color: var(--tg-theme-button-color, #2481cc); margin-top: 0; margin-bottom: 20px; }
+        .form-group { margin-bottom: 14px; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; }
+        select, input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            background-color: var(--tg-theme-button-color, #2481cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:active { opacity: 0.85; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Input Prospek Baru</h2>
+        <form id="leadForm">
+            <div class="form-group">
+                <label for="sheetName">Pilih Perumahan (Tab Sheet)</label>
+                <select id="sheetName" required>
+                    <option value="BARRA RESIDENCE">BARRA RESIDENCE</option>
+                    <option value="BMR">BMR</option>
+                    <option value="MAESTRO ESTATE BANDENGAN">MAESTRO ESTATE BANDENGAN</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rumahNo">Nomor Rumah / Unit</label>
+                <input type="text" id="rumahNo" placeholder="Contoh: A09" required>
+            </div>
+            <div class="form-group">
+                <label for="statusRumah">Status Rumah</label>
+                <select id="statusRumah">
+                    <option value="Ready">Ready</option>
+                    <option value="Indent">Indent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="prioritas">Prioritas</label>
+                <select id="prioritas">
+                    <option value="P0">P0</option>
+                    <option value="P1">P1</option>
+                    <option value="P2">P2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pemilik">Nama Konsumen / Pemilik</label>
+                <input type="text" id="pemilik" placeholder="Nama Lengkap" required>
+            </div>
+            <div class="form-group">
