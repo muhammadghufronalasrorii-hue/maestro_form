@@ -83,3 +83,55 @@
                 <input type="text" id="pemilik" placeholder="Nama Lengkap" required>
             </div>
             <div class="form-group">
+<label for="whatsapp">Nomor WhatsApp</label>
+                <input type="text" id="whatsapp" placeholder="08xxxxxxxxxx" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Status Prospek</label>
+                <select id="status">
+                    <option value="Booking">Booking</option>
+                    <option value="Akad">Akad</option>
+                    <option value="Reject">Reject</option>
+                    <option value="Survey">Survey</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bank">Bank / Pembayaran</label>
+                <select id="bank">
+                    <option value="BTN">BTN</option>
+                    <option value="Mandiri">Mandiri</option>
+                    <option value="Cash">Cash</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pencapaian">Pencapaian / Keterangan</label>
+                <input type="text" id="pencapaian" placeholder="Contoh: Berkas masuk bank">
+            </div>
+            <button type="button" onclick="submitData()">Simpan Data</button>
+        </form>
+    </div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        function submitData() {
+            const data = {
+                sheetName: document.getElementById('sheetName').value,
+                rumahNo: document.getElementById('rumahNo').value,
+                statusRumah: document.getElementById('statusRumah').value,
+                prioritas: document.getElementById('prioritas').value,
+                pemilik: document.getElementById('pemilik').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                status: document.getElementById('status').value,
+                bank: document.getElementById('bank').value,
+                pencapaian: document.getElementById('pencapaian').value
+            };
+
+            tg.sendData(JSON.stringify(data));
+            tg.close();
+        }
+    </script>
+</body>
+</html>
+    
